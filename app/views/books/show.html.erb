@@ -18,6 +18,21 @@
           <td><%= link_to @bookfind.title, book_path(@bookfind) %></td>
           <td><%= @bookfind.body %></td>
           <td>
+          <% if @bookfind.favorited_by?(current_user) %>
+            <p>
+              <%= link_to book_favorites_path(@bookfind), method: :delete do %>
+                 ♥<%= @bookfind.favorites.count %>
+              <% end %>
+            </p>
+          <% else %>
+            <p>
+              <%= link_to book_favorites_path(@bookfind), method: :post do %>
+                 ♡<%= @bookfind.favorites.count %>
+              <% end %>
+            </p>
+          <% end %>
+          </td>
+          <td>
             <p>コメント数:<%= @bookfind.book_comments.count %> </p>
           </td>
           <% if @bookfind.user_id == current_user.id %>
