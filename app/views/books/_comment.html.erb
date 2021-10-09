@@ -1,0 +1,16 @@
+ <table>
+  <% @bookfind.book_comments.each do |book_comment| %>
+  <tr>
+    <td>
+      <%= attachment_image_tag(book_comment.user, :profile_image, :fill, 50, 50, fallback: "no-image-icon.jpg") %><br>
+      <%= link_to book_comment.user.name, user_path(book_comment.user) %>
+    </td>
+    <td><%= book_comment.comment %></td>
+    <% if book_comment.user_id == current_user.id %>
+    <td>
+      <%= link_to "Destroy", book_book_comment_path(@bookfind, book_comment.id), method: :delete, remote: true %>
+    </td>
+    <% end %>
+  </tr>
+  <% end %>
+</table>
